@@ -8,4 +8,10 @@ router
   .get(materialController.getAllMaterials)
   .post(materialController.createMaterial);
 
+router
+  .route('/:id')
+  .get(materialController.getMaterial)
+  .patch(materialController.updateMaterial)
+  .delete(materialController.deleteMaterial);
+
 module.exports = router;
