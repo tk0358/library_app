@@ -1,7 +1,7 @@
 const Material = require('../models/materialModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
-const factory = require('../controllers/handlerFactory');
+const factory = require('./handlerFactory');
 
 exports.getAllMaterials = factory.getAll(Material);
 exports.createMaterial = factory.createOne(Material);

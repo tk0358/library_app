@@ -15,6 +15,21 @@ const materialSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  libraries: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Library',
+    },
+  ],
+});
+
+materialSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'libraries',
+    select: 'name',
+  });
+
+  next();
 });
 
 const Material = mongoose.model('Material', materialSchema);
