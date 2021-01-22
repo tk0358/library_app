@@ -1,0 +1,18 @@
+extends base
+
+block content
+  main.main
+    table.material-table
+      tr
+        th タイトル
+        th 作者
+        th 出版社
+        th 図書館
+      each material in materials
+        tr
+          td= material.title
+          td= material.author
+          td= material.publisher
+          each library in material.libraries
+            td= library.name
+      

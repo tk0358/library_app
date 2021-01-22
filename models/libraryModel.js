@@ -11,9 +11,20 @@ const librarySchema = new mongoose.Schema(
       type: Number,
       required: [true, 'A library must have how many days we can borrow books'],
     },
+    how_long_comic: {
+      type: Number,
+      required: [
+        true,
+        'A library must have how many days we can borrow comics',
+      ],
+    },
     how_long_cd: {
       type: Number,
       required: [true, 'A library must have how many days we can borrow CDs'],
+    },
+    how_long_dvd: {
+      type: Number,
+      required: [true, 'A library must have how many days we can borrow DVDs'],
     },
     can_extend_at_web: {
       type: Boolean,

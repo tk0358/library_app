@@ -1,0 +1,10 @@
+.material-table {
+  padding: 5px;
+}
+.material-table th {
+  text-align: left;
+  padding: 5px;
+}
+.material-table td {
+  padding: 5px;
+}

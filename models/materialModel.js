@@ -15,6 +15,13 @@ const materialSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  type: {
+    type: String,
+    enum: {
+      values: ['book', 'comic', 'CD', 'DVD'],
+      message: 'Material type is either bookm, comic, CD or DVD',
+    },
+  },
   libraries: [
     {
       type: mongoose.Schema.ObjectId,

@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const materialRouter = require('./routes/materialRoutes');
 const libraryRouter = require('./routes/libraryRoutes');
+const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.json({ limit: '10kb' }));
+
+app.use('/', viewRouter);
 
 app.use('/api/v1/materials', materialRouter);
 app.use('/api/v1/libraries', libraryRouter);
