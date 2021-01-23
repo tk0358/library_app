@@ -1,0 +1,19 @@
+extends base
+
+block content
+  h1 図書館別の借りたい資料
+  each library in libraryAry
+    if materialObj[library].length > 0
+      h2= library
+      table 
+        tr
+          th タイトル
+          th 作者
+          th 出版社
+          th タイプ
+        each material in materialObj[library]
+          tr
+            td= material.title
+            td= material.author
+            td= material.publisher
+            th= material.type

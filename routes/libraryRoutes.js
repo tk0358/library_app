@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const libraryController = require('../controllers/libraryController');
+// const materialRouter = require('./materialRoutes');
+
+router.get(
+  '/:libraryId/materials',
+  libraryController.getAllMaterialsFromLibrary
+);
 
 router
   .route('/')
