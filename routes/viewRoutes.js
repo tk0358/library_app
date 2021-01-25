@@ -8,4 +8,6 @@ router
   .route('/materials-per-library')
   .get(viewsController.getMaterialIndexPerLibrary);
 
+router.route('/getAddMaterialPage').get(viewsController.getAddMaterialPage);
+
 module.exports = router;

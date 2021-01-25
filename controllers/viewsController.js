@@ -40,3 +40,12 @@ exports.getMaterialIndexPerLibrary = catchAsync(async (req, res) => {
     materialObj,
   });
 });
+
+exports.getAddMaterialPage = catchAsync(async (req, res) => {
+  libraries = await Library.find();
+  console.log(libraries);
+  res.status(200).render('addMaterial', {
+    title: '借りたい資料の追加',
+    libraries,
+  });
+});

@@ -1,0 +1,31 @@
+extends base
+
+block content
+  h1= title
+  form.add-material-form
+    .input-field
+      label(for='author') 作者：
+      input#author(type='text' name='author')
+    .input-field
+      label(for='title') タイトル：
+      input#title(type='text' name='title')
+    .input-field
+      label(for='publisher') 出版社：
+      input#publisher(type='text' name='publisher')
+    .input-field
+      label(for='type') タイプ：
+      select#type(name='type')
+        option(value='book') 書籍
+        option(value='comic') マンガ
+        option(value='CD') CD
+        option(value='DVD') DVD
+    .input-field
+      label(for='libraries') 収蔵図書館：
+      select.libraries(name='libraries')
+        each library in libraries
+          option(value=`${library._id}`)= library.name
+      span.plus-btn ➕
+    .input-field
+      input(type='submit' value='追加する')
+      
+
