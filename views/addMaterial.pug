@@ -19,12 +19,13 @@ block content
         option(value='comic') マンガ
         option(value='CD') CD
         option(value='DVD') DVD
-    .input-field
-      label(for='libraries') 収蔵図書館：
+    .input-library-field
+      label 収蔵図書館（4つまで）：
       select.libraries(name='libraries')
+        option(value="" selected) 選んで下さい
         each library in libraries
           option(value=`${library._id}`)= library.name
-      span.plus-btn ➕
+    span.plus-btn ➕
     .input-field
       input(type='submit' value='追加する')
       

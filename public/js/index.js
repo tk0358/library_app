@@ -12,14 +12,25 @@ if (addMaterialForm) {
     const author = document.getElementById('author').value;
     const publisher = document.getElementById('publisher').value;
     const type = document.getElementById('type').value;
-    const libraries = document.getElementById('libraries').value;
+    const libraries = Array.from(document.querySelectorAll('.libraries')).map(
+      el => el.value
+    );
+    // 図書館が選択されていない""の要素を削除
+    libraries.some((val, i) => {
+      if (!val) libraries.splice(i, 1);
+    });
     addMaterial({ title, author, publisher, type, libraries });
   });
 }
 
 if (plusBtn) {
   plusBtn.addEventListener('click', e => {
-    console.log(e.target.parentNode.children);
+    const libraryField = e.target.previousElementSibling;
+    if (libraryField.children.length <= 4) {
+      console.log(libraryField.children.length);
+      const copyNode = libraryField.lastElementChild.cloneNode(true);
+      libraryField.appendChild(copyNode);
+    }
   });
 }
 
