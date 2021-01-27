@@ -3,10 +3,11 @@ const Material = require('../models/materialModel');
 const Library = require('../models/libraryModel');
 
 exports.getMaterialIndexPerType = catchAsync(async (req, res) => {
-  const books = await Material.find({ type: 'book' });
-  const comics = await Material.find({ type: 'comic' });
-  const cds = await Material.find({ type: 'CD' });
-  const dvds = await Material.find({ type: 'DVD' });
+  const query = Material.find({ status: 'want_to' });
+  const books = await query.find({ type: 'book' });
+  const comics = await query.find({ type: 'comic' });
+  const cds = await query.find({ type: 'CD' });
+  const dvds = await query.find({ type: 'DVD' });
 
   res.status(200).render('materialIndexPerType', {
     title: '借りたい資料一覧',
@@ -20,7 +21,7 @@ exports.getMaterialIndexPerType = catchAsync(async (req, res) => {
 exports.getMaterialIndexPerLibrary = catchAsync(async (req, res) => {
   const materialObj = {};
   const libraries = await Library.find();
-  const materials = await Material.find();
+  const materials = await Material.find({ status: 'want_to' });
   const libraryAry = [];
   libraries.forEach(library => {
     // console.log(library);

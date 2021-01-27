@@ -28,6 +28,14 @@ const materialSchema = new mongoose.Schema({
       ref: 'Library',
     },
   ],
+  status: {
+    type: String,
+    enum: {
+      values: ['want_to', 'be_borrowing', 'has_returned'],
+      message: "Status must be 'want_to', 'be_borrowing' or 'has_returned'",
+    },
+    default: 'want_to',
+  },
 });
 
 materialSchema.pre(/^find/, function (next) {
