@@ -4,6 +4,7 @@ const path = require('path');
 const materialRouter = require('./routes/materialRoutes');
 const libraryRouter = require('./routes/libraryRoutes');
 const viewRouter = require('./routes/viewRoutes');
+const borrowingRouter = require('./routes/borrowingRoutes');
 const AppError = require('./utils/appError');
 
 app.set('view engine', 'pug');
@@ -17,6 +18,7 @@ app.use('/', viewRouter);
 
 app.use('/api/v1/materials', materialRouter);
 app.use('/api/v1/libraries', libraryRouter);
+app.use('/api/v1/borrowings', borrowingRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this `, 404));

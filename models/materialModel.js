@@ -18,8 +18,8 @@ const materialSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: {
-      values: ['book', 'comic', 'CD', 'DVD'],
-      message: 'Material type is either bookm, comic, CD or DVD',
+      values: ['book', 'comic', 'cd', 'dvd'],
+      message: 'Material type is either bookm, comic, cd or dvd',
     },
   },
   libraries: [
