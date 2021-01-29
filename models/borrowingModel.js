@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Material = require('./materialModel');
 const Library = require('./libraryModel');
+const moment = require('moment-timezone');
+moment.tz.setDefault('Asia/Tokyo');
 
 const borrowingSchema = new mongoose.Schema({
   material: {
@@ -12,20 +14,17 @@ const borrowingSchema = new mongoose.Schema({
     ref: 'Library',
   },
   checkoutDate: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: moment().format(),
   },
-  returnDate: Date,
+  returnDate: String,
 });
 
 borrowingSchema.pre('save', async function (next) {
   const type = (await Material.findById(this.material)).type;
-  // console.log(type);
   const days = (await Library.findById(this.library))[`how_long_${type}`];
-  // console.log(days);
-  this.returnDate = new Date(
-    Date.parse(this.checkoutDate) + days * 24 * 60 * 60 * 1000
-  );
+  const returnDate = new Date(Date.now() + days * 24 * 60 * 60 * 1000);
+  this.returnDate = moment(returnDate).format();
   next();
 });
 
