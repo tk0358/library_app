@@ -6,8 +6,8 @@ exports.getMaterialIndexPerType = catchAsync(async (req, res) => {
   const query = Material.find({ status: 'want_to' });
   const books = await query.find({ type: 'book' });
   const comics = await query.find({ type: 'comic' });
-  const cds = await query.find({ type: 'CD' });
-  const dvds = await query.find({ type: 'DVD' });
+  const cds = await query.find({ type: 'cd' });
+  const dvds = await query.find({ type: 'dvd' });
 
   res.status(200).render('materialIndexPerType', {
     title: '借りたい資料一覧',

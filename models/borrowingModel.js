@@ -18,6 +18,11 @@ const borrowingSchema = new mongoose.Schema({
     default: moment().format(),
   },
   returnDate: String,
+  memo: String,
+  returned: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 borrowingSchema.pre('save', async function (next) {

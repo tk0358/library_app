@@ -5,15 +5,18 @@ block content
   each library in libraryAry
     if materialObj[library].length > 0
       h2= library
-      table 
+      table.material-table(data-library=`${library}`)
         tr
           th タイトル
           th 作者
           th 出版社
           th タイプ
+          th アクション
         each material in materialObj[library]
-          tr
+          tr(id=`${material.id}`)
             td= material.title
             td= material.author
             td= material.publisher
-            th= material.type
+            td= material.type
+            td: button.pre-borrowing-action.pre-borrowing-action-per-lib 貸出処理
+

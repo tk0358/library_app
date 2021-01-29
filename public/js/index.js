@@ -4,6 +4,73 @@ import { addMaterial } from './addMaterial';
 
 const addMaterialForm = document.querySelector('.add-material-form');
 const plusBtn = document.querySelector('.plus-btn');
+const preBorrowingBtnsPerLibrary = document.querySelectorAll(
+  '.pre-borrowing-action-per-lib'
+);
+// const borrowingBtnsPerLibrary = document.querySelectorAll(
+//   '.borrowing-action-per-lib'
+// );
+
+const pushDateToArray = (days, objDate) => {
+  const year = objDate.getFullYear();
+  const month = objDate.getMonth() + 1;
+  const day = objDate.getDate();
+  days.push(`${year}/${month}/${day}`);
+};
+
+const create4DaysArray = () => {
+  const days = [];
+  let objDate = new Date();
+  pushDateToArray(days, objDate);
+  objDate.setDate(objDate.getDate() - 1);
+  pushDateToArray(days, objDate);
+  objDate.setDate(objDate.getDate() - 1);
+  pushDateToArray(days, objDate);
+  objDate.setDate(objDate.getDate() - 1);
+  pushDateToArray(days, objDate);
+  return days;
+};
+
+if (preBorrowingBtnsPerLibrary) {
+  preBorrowingBtnsPerLibrary.forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+
+      const days = create4DaysArray();
+      console.log(days);
+
+      let htmlStr = '';
+      htmlStr += '<select name="days">';
+      htmlStr += '<option value="">借りた日付</option>';
+      for (const day of days) {
+        htmlStr += `<option value=${day}>${day}</option>`;
+      }
+      htmlStr += '</select>';
+      htmlStr +=
+        '<button class="borrowing-action borrowing-action-per-lib">貸出</button>';
+      e.target.parentNode.innerHTML = htmlStr;
+
+      // document
+      //   .querySelector('.borrowing-action-per-lib')
+      //   .addEventListener('click', e => {
+      //     e.preventDefault();
+      //     console.log('btn is clicked');
+      //   });
+      document.querySelectorAll('.borrowing-action-per-lib').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const material = e.target.parentNode.parentNode.id;
+          const library =
+            e.target.parentNode.parentNode.parentNode.parentNode.dataset
+              .library;
+
+          const date = e.target.previousElementSibling.value;
+          console.log(material, library, date);
+        });
+      });
+    })
+  );
+}
 
 if (addMaterialForm) {
   addMaterialForm.addEventListener('submit', e => {
