@@ -1,0 +1,14 @@
+extends base
+
+block content
+  h1 借りている資料一覧
+  table.material-table
+    tr
+      th 資料
+      th 図書館
+    each borrowing in borrowings
+      tr
+        td= borrowing.material
+        td= borrowing.library
+
+

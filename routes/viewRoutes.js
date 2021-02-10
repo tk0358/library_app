@@ -10,4 +10,8 @@ router
 
 router.route('/getAddMaterialPage').get(viewsController.getAddMaterialPage);
 
+router
+  .route('/getBorrowingMaterials')
+  .get(viewsController.getBorrowingMaterials);
+
 module.exports = router;

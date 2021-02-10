@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const Material = require('../models/materialModel');
 const Library = require('../models/libraryModel');
+const Borrowing = require('../models/borrowingModel');
 
 exports.getMaterialIndexPerType = catchAsync(async (req, res) => {
   const query = Material.find({ status: 'want_to' });
@@ -46,10 +47,20 @@ exports.getMaterialIndexPerLibrary = catchAsync(async (req, res) => {
 });
 
 exports.getAddMaterialPage = catchAsync(async (req, res) => {
-  libraries = await Library.find();
+  const libraries = await Library.find();
   // console.log(libraries);
   res.status(200).render('addMaterial', {
     title: '借りたい資料の追加',
     libraries,
+  });
+});
+
+exports.getBorrowingMaterials = catchAsync(async (req, res) => {
+  const borrowings = await Borrowing.find().sort('library');
+  console.log(borrowings);
+
+  res.status(200).render('borrowingMaterials', {
+    title: '借りている資料一覧',
+    borrowings,
   });
 });
