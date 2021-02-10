@@ -25,7 +25,7 @@ exports.getMaterialIndexPerLibrary = catchAsync(async (req, res) => {
   const libraryAry = [];
   libraries.forEach(library => {
     // console.log(library);
-    libraryAry.push(library.name);
+    libraryAry.push({ name: library.name, id: library.id });
     materialObj[library.name] = [];
     materials.forEach(material => {
       material.libraries.forEach(matLibrary => {
@@ -34,6 +34,9 @@ exports.getMaterialIndexPerLibrary = catchAsync(async (req, res) => {
       });
     });
   });
+
+  console.log(libraryAry);
+  console.log(materialObj);
 
   res.status(200).render('materialINdexPerLibrary', {
     title: '図書館ごとの借りたい資料',

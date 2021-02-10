@@ -3,16 +3,16 @@ extends base
 block content
   h1 図書館別の借りたい資料一覧
   each library in libraryAry
-    if materialObj[library].length > 0
-      h2= library
-      table.material-table(data-library=`${library}`)
+    if materialObj[library.name].length > 0
+      h2= library.name
+      table.material-table(data-library=`${library.id}`)
         tr
           th タイトル
           th 作者
           th 出版社
           th タイプ
           th アクション
-        each material in materialObj[library]
+        each material in materialObj[library.name]
           tr(id=`${material.id}`)
             td= material.title
             td= material.author

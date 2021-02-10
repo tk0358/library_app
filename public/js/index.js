@@ -1,6 +1,7 @@
 /* eslint-disable */
 import '@babel/polyfill';
 import { addMaterial } from './addMaterial';
+import { createBorrow } from './borrowing';
 
 const addMaterialForm = document.querySelector('.add-material-form');
 const plusBtn = document.querySelector('.plus-btn');
@@ -37,17 +38,19 @@ if (preBorrowingBtnsPerLibrary) {
       e.preventDefault();
 
       const days = create4DaysArray();
-      console.log(days);
+      // console.log(days);
 
-      let htmlStr = '';
-      htmlStr += '<select name="days">';
-      htmlStr += '<option value="">借りた日付</option>';
+      let htmlStr = `
+        <select name="days">
+        <option value="">借りた日付</option>
+      `;
       for (const day of days) {
         htmlStr += `<option value=${day}>${day}</option>`;
       }
-      htmlStr += '</select>';
-      htmlStr +=
-        '<button class="borrowing-action borrowing-action-per-lib">貸出</button>';
+      htmlStr += `
+        </select>
+        <button class="borrowing-action borrowing-action-per-lib">貸出</button>
+      `;
       e.target.parentNode.innerHTML = htmlStr;
 
       // document
@@ -65,7 +68,11 @@ if (preBorrowingBtnsPerLibrary) {
               .library;
 
           const date = e.target.previousElementSibling.value;
+
+          // const library = await Library.find({ name: libraryName });
           console.log(material, library, date);
+
+          createBorrow(material, library, date);
         });
       });
     })
